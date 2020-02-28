@@ -1,15 +1,16 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {user_logout} from '../redux/Action'
 
-const handleClick = () => {
+const handleClick = (props) => {
     // console.log(this.props.loginStatus)
-    if (this.props.loginStatus === 'Logout') {
-        this.props.user_logout()
+    if (props.isLoggedIn) {
+        props.user_logout()
     }
 } 
 
-function NavBar(props) {    
+function NavBar(props) {
     return (
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <a class="navbar-brand" href="#"><b>Task Manager</b></a>
@@ -26,19 +27,19 @@ function NavBar(props) {
                         </li>                    
                     </ul>
                     <ul class="navbar-nav">
-                        {props.showRegisterButton && 
+                        {props.showRegisterButton &&  
                             <li class="nav-item active ml-auto">
                                 <Link class="nav-link" to='/register' > Register <span class="sr-only">(current)</span></Link>
                             </li> 
                         }
 
                         <li class="nav-item active ml-auto">
-                            <Link to='/login' onClick={handleClick} class="nav-link"> {this.props.menuLabel} <span class="sr-only">(current)</span></Link>
+                            <Link to='/login' onClick={() => handleClick(props)} class="nav-link"> {props.menuLabel} <span class="sr-only">(current)</span></Link>
                         </li>                 
                     </ul>
                 </div>
             </nav>
-    )
+        )
     }
 
 
